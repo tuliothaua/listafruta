@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listas</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(to right, #69719e, #b52929);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+h1 {
+    padding: 20px 0px;
+    background-color: rgb(17, 17, 17);
+    color: white;
+    font-family: 'Times New Roman';
+    
+}
+
+input, button {
+    font-family: 'Franklin Gothic Medium';
+    margin: 3%;
+    text-decoration: none;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    padding: 25px;
+    cursor: pointer;
+    font-size: 10px;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #63525a;
+    transform: scale(1.2);
+}
+
+footer {
+    font-family: "Franklin Gothic Medium";
+    font-style: italic;
+    background-color: rgb(17, 17, 17);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+    </style>
+    </head>
+    <body>
+        <h1>- Lista de Coisas -</h1>
+    
+        <input type="text" id="novaFruta" placeholder="Digite uma fruta">
+        <button onclick="adicionarFruta()">Adicionar</button>
+        <button onclick="ordenarFrutas()">Ordenar</button>
+        <button onclick="limparFrutas()">Limpar lista</button>
+    
+        <ul id="listaFrutas"></ul>
+    
+        <script>
+            let frutas = [];
+
+            function atualizarLista() {
+                const lista = document.getElementById("listaFrutas");
+                lista.innerHTML = "";
+                frutas.forEach((fruta, index) => {
+                    let item = document.createElement("li");
+                    item.textContent = fruta + " ";
+                    let btn = document.createElement("button");
+                    btn.textContent = "X";
+                    btn.onclick = () => removerFruta(index);
+                    item.appendChild(btn);
+                    lista.appendChild(item);
+                });
+            }
+
+            function adicionarFruta() {
+                const input = document.getElementById("novaFruta");
+                const valor = input.value.trim();
+                if (valor !== "") {
+                    frutas.push(valor);
+                    input.value = "";
+                    atualizarLista();
+                }
+            }
+
+            function removerFruta(index) {
+                frutas.splice(index, 1);
+                atualizarLista();
+            }
+
+            function ordenarFrutas() {
+                frutas.sort();
+                atualizarLista();
+            }
+
+            function limparFrutas() {
+                frutas = [];
+                atualizarLista();
+            }
+        </script>
+        <footer>&copy; TúlioThauãDutra</footer>
+    </body>
+    
+    </html>
